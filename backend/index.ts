@@ -13,16 +13,21 @@ app.use(express.json({ limit: "50mb" }));
 // COOKIE PARSER
 app.use(cookieParser());
 // CORS [CROSS ORIGIN RESOURCE SHARING]
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173', 
+  credentials: true, 
+}));
 // ROUTES
+import userRouter from "./routes/user.route";
+app.use("/api/v1", userRouter);
 
 // TESTING API
-app.get("/", (req:Request, res:Response) =>
+app.get("/", (req: Request, res: Response) =>
   res.status(200).json({ success: true, message: "API is working, PING/PONG" })
 );
 
 // UNKNOWN ROUTE
-app.all("*", (req:Request, res:Response, next:NextFunction) => {
+app.all("*", (req: Request, res: Response, next: NextFunction) => {
   const err = new Error(`Route ${req.originalUrl} not found!`);
   next(err);
 });
