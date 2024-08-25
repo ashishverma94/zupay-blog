@@ -33,7 +33,7 @@ const SignupPage = () => {
 
     try {
       await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/v1/register-user`,
+        `${import.meta.env.VITE_BACKEND_URL}/register-user`,
         {
           name,
           email,
