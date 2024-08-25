@@ -9,7 +9,7 @@ const LoginPage = () => {
   const { toast } = useToast();
   const { loginUser } = useAuthStore();
   const navigate = useNavigate();
-  
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -60,7 +60,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-6 bg-white shadow-lg rounded-lg">
         <h2 className="text-4xl font-bold  text-center text-[black]">Login</h2>
         <div className="space-y-4">
@@ -120,6 +120,9 @@ const LoginPage = () => {
         {error && (
           <div className="text-center text-[red] font-bold">{error}</div>
         )}
+      </div>
+      <div className="font-[600] mt-[20px]">
+        <h1 className=" cursor-pointer text-[#2c76f7] hover:text-[blue]" onClick={()=>navigate("/signup")}>Create a new account</h1>
       </div>
     </div>
   );

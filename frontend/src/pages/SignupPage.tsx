@@ -32,14 +32,11 @@ const SignupPage = () => {
     setError(null);
 
     try {
-      await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/register-user`,
-        {
-          name,
-          email,
-          password,
-        }
-      );
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/register-user`, {
+        name,
+        email,
+        password,
+      });
       navigate("/login");
     } catch (err: any) {
       if (err.response) {
@@ -57,8 +54,8 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white shadow-lg rounded-lg">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <div className="w-full  max-w-md p-8 space-y-6 bg-white shadow-lg rounded-lg">
         <h2 className="text-4xl font-bold  text-center text-[black]">
           Register
         </h2>
@@ -137,6 +134,14 @@ const SignupPage = () => {
         {error && (
           <div className="text-center text-[red] font-bold">{error}</div>
         )}
+      </div>
+      <div className="font-[600] mt-[20px]">
+        <h1
+          className=" cursor-pointer text-[#2c76f7] hover:text-[blue]"
+          onClick={() => navigate("/login")}
+        >
+          Already have account.
+        </h1>
       </div>
     </div>
   );
