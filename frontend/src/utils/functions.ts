@@ -29,3 +29,22 @@ export function timeAgo(dateString: string): string {
     ? `${count} ${intervals[intervalIndex].label} ago`
     : `${count} ${intervals[intervalIndex].label}s ago`;
 }
+
+export const getRandomColor = () => {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+};
+
+export function getDPName(name: string) {
+  const trimmedName = name.trim();
+  const nameParts = trimmedName.split(/\s+/);
+
+  const initials = nameParts
+    .map((part) => part.charAt(0).toUpperCase())
+    .join("");
+  return initials.substring(0, 2);
+}

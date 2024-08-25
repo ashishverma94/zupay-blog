@@ -35,8 +35,14 @@ const BlogCard: FC<props> = ({ id, title, conclusion, coverImgUrl }) => {
             </div>
           </span>
           <div className="relative text-[white] h-[82%]  px-[20px] py-[5px] mx-[5px] my-[5px] block rounded-[6px] font-[600]">
-            <h1 className="text-[white] font-[600]">{title}</h1>
-            <p className="text-[white] text-[14px] font-[400]">{conclusion}</p>
+            <h1 className="text-[white] font-[600]">
+              {title.slice(0, 40)}
+              {title.length > 40 && " ..."}
+            </h1>
+            <p className="text-[white] text-[14px] font-[400]">
+              {conclusion.slice(0, 210)}
+              {conclusion.length >= 210 && "..."}
+            </p>
           </div>
         </div>
       </div>

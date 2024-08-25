@@ -4,7 +4,6 @@ import blogModel from "../models/blog.model";
 // CREATE BLOG
 export const createBlog = async (req: Request, res: Response) => {
   const { title, coverImgUrl, contentData, conclusion } = req.body;
-  console.log(title, coverImgUrl, contentData, conclusion);
 
   try {
     const newBlog = {
@@ -60,7 +59,7 @@ export const deleteBlog = async (req: Request, res: Response) => {
 
   console.log(id)
   try {
-    // await blogModel.findByIdAndDelete(id);
+    await blogModel.findByIdAndDelete(id);
 
     res.status(200).json({
       success: true,
@@ -96,5 +95,3 @@ export const getBlogs = async (req: Request, res: Response) => {
       .json({ success: false, message: err.message || "Server error" });
   }
 };
-
-// GIVE COMMENT TO BLOG

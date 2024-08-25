@@ -1,8 +1,8 @@
-import useSideStore from "@/store/sideStore";
-import { BlogCard, HeroSection, NoContent } from "@/components";
-import { useEffect, useState } from "react";
-import LoadingGif from "../assets/Loading2.gif";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import useSideStore from "@/store/sideStore";
+import LoadingGif from "../assets/Loading2.gif";
+import { BlogCard, HeroSection, NoContent, SearchBar } from "@/components";
 
 interface IBlogData {
   _id: string;
@@ -16,23 +16,17 @@ const HomePage = () => {
   const { curValue } = useSideStore();
   const [blogData, setBlogData] = useState<IBlogData[]>([]);
   const [loadingData, setLoadingData] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setError(null);
         setLoadingData(true);
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_URL}/posts`
         );
         setBlogData(response?.data?.blogs);
       } catch (err: any) {
-        if (err.response) {
-          setError(err?.response.data.message || "An error occurred");
-        } else {
-          setError(err.message || "An unexpected error occurred");
-        }
+        console.log(err);
       } finally {
         setLoadingData(false);
       }
@@ -46,24 +40,7 @@ const HomePage = () => {
       {curValue === 0 ? (
         <div>
           <HeroSection />
-          <form className="max-w-md mx-auto mb-6">
-            <div className="relative">
-              <div className="absolute  inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                <img
-                  src="https://img.icons8.com/?size=100&id=131&format=png&color=000000"
-                  className=" h-[20px]"
-                  alt="search-icon"
-                />
-              </div>
-              <input
-                type="search"
-                id="default-search"
-                className="block w-full px-8 py-4 ps-10 text-sm text-gray-900 border border-gray-600 rounded-[30px] bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                placeholder="Search blogs ..."
-                required
-              />
-            </div>
-          </form>
+          <SearchBar items={blogData} />
 
           {loadingData ? (
             <div className=" flex justify-center items-center w-full h-[40vh]">

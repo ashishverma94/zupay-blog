@@ -4,6 +4,7 @@ import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ContentInput, RedMark } from "@/components";
 import { useToast } from "@/components/ui/use-toast";
+import { useNavigate } from "react-router-dom";
 
 const AddBlog = () => {
   const label_css = "block text-md font-medium text-gray-700";
@@ -16,6 +17,7 @@ const AddBlog = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   setTimeout(() => {
     setError("");
@@ -24,23 +26,28 @@ const AddBlog = () => {
   const handleSubmit = async () => {
     if (!title) {
       setError("Please enter title of blog");
+      return;
     }
     if (!coverImgUrl) {
       setError("Please enter URL of cover image");
+      return;
     }
     if (!contentData[contentData.length - 1].cTitle) {
       setError("Please enter title of content");
+      return;
     }
     if (!contentData[contentData.length - 1].cDesc) {
       setError("Please enter description");
+      return;
     }
     if (!conclusion) {
       setError("Please enter conclusion");
+      return;
     }
 
     try {
       setLoading(true);
-      await axios.post(
+      const response: any = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/posts`,
         { title, coverImgUrl, contentData, conclusion },
         { withCredentials: true }
@@ -50,6 +57,8 @@ const AddBlog = () => {
         style: { backgroundColor: "#4CAF50", color: "#fff" },
         description: "✔️ Blog added successfully!",
       });
+
+      navigate(`/blog/${response?.data?.blog?._id}`);
     } catch (err: any) {
       toast({
         variant: "destructive",

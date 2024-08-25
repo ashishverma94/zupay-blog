@@ -20,7 +20,7 @@ const HeroSection = () => {
             </p>
             <div className="mt-8 flex w-full space-x-8 justify-center">
               <button
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/add-blog")}
                 className="inline-flex items-center justify-center  py-3 border border-transparent  font-medium focus:outline-none ring-2 ring-offset-2 ring-transparent ring-offset-transparent disabled:bg-gray-400 appearance-none text-white bg-[#6947BF] hover:bg-[#8b60fb] focus:ring-[#6947BF] focus:ring-offset-white !px-12 !shadow-lg !rounded-full !text-base"
               >
                 <p className="flex justify-center items-center gap-2">
@@ -29,7 +29,7 @@ const HeroSection = () => {
                     className="h-[30px] "
                     alt="pen"
                   />
-                  Become A Creator
+                  Create New Blog
                 </p>
               </button>
             </div>

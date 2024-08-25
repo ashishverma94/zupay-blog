@@ -22,7 +22,8 @@ app.use(
 // ROUTES
 import userRouter from "./routes/user.route";
 import blogRouter from "./routes/blog.route";
-app.use("/", userRouter, blogRouter);
+import commentRouter from "./routes/comment.route";
+app.use("/", userRouter, blogRouter, commentRouter);
 
 // TESTING API
 app.get("/", (req: Request, res: Response) =>

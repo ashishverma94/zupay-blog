@@ -1,6 +1,5 @@
 import axios from "axios";
 import { Loader2 } from "lucide-react";
-import { ContentCard } from "@/components";
 import { useEffect, useState } from "react";
 import { timeAgo } from "@/utils/functions";
 import useBlogStore from "@/store/blogStore";
@@ -8,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import LoadingGif from "../assets/Loading2.gif";
 import { useToast } from "@/components/ui/use-toast";
 import { useNavigate, useParams } from "react-router-dom";
+import { CommentCard, CommentPopup, ContentCard } from "@/components";
 
 interface IBlogData {
   _id: string;
@@ -16,6 +16,12 @@ interface IBlogData {
   contentData: [{ cTitle: string; cDesc: string }];
   coverImgUrl: string;
   createdAt: string;
+}
+
+interface ICommentData {
+  name: string;
+  rating: number;
+  comment: string;
 }
 
 const BlogDetailsPage = () => {
@@ -104,6 +110,45 @@ const BlogDetailsPage = () => {
   setTimeout(() => {
     setDelErr("");
   }, 4000);
+
+  // GET COMMENTS OF BLOG
+  const [comments, setComments] = useState<ICommentData[] | null>(null);
+  const [loadingComments, setLoadingComments] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setError(null);
+        setLoadingComments(true);
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/get-comments/${id}`
+        );
+        setComments(response?.data?.comments);
+      } catch (err: any) {
+        if (err.response) {
+          toast({
+            variant: "destructive",
+            description:
+              err?.response.data.message ||
+              "Failed to load comments for this blog!",
+          });
+        } else {
+          toast({
+            variant: "destructive",
+            description:
+              err.message || "Failed to load comments for this blog!",
+          });
+        }
+      } finally {
+        setLoadingComments(false);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  // COMMENT POPUP
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   return (
     <div className="pc:w-[50%] tablet:w-[70%] w-[95%] py-4  flex flex-col">
@@ -207,14 +252,62 @@ const BlogDetailsPage = () => {
         </div>
       )}
 
+      {/* COMMENTS  */}
       <>
-        <div className="px-10 mt-7">
-          <span className="font-[800] text-[32px] leading-[38.4px]">
-            Comments
-          </span>
-        </div>
-        <div></div>
+        {loadingComments ? (
+          <div className=" flex justify-center items-center w-full h-[70vh]">
+            <img className="h-[100px]" src={LoadingGif} alt="loading-gif" />
+          </div>
+        ) : (
+          <div className="px-10 mt-7 ">
+            <div className="flex justify-between items-center">
+              <span className="font-[800] text-[32px] leading-[38.4px]">
+                Comments
+              </span>
+              <Button
+                onClick={() => setIsPopupOpen(true)}
+                className="bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-lg hover:from-blue-600 hover:to-blue-800 transition duration-300 ease-in-out"
+              >
+                Give Comment
+              </Button>
+            </div>
+            <div>
+              {comments && comments.length === 0 ? (
+                <div className=" w-full mt-[40px] font-[500] text-[30px] flex justify-center ">
+                  No comments on this blog.
+                </div>
+              ) : (
+                <div>
+                  {comments &&
+                    comments
+                      .slice()
+                      .reverse()
+                      .map((comment: any, index: number) => {
+                        return (
+                          <CommentCard
+                            key={index}
+                            name={comment.name}
+                            rating={comment.rating}
+                            comment={comment.comment}
+                            createdAt={comment.createdAt}
+                          />
+                        );
+                      })}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </>
+      {isPopupOpen && (
+        <CommentPopup
+          setIsPopupOpen={setIsPopupOpen}
+          id={id}
+          setComments={setComments}
+          comments={comments}
+        />
+      )}
+      {/* DELETE BLOG POPUP  */}
       {open && (
         <div
           className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
