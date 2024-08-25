@@ -17,7 +17,7 @@ const Navbar = () => {
     try {
       setIsLoading(true);
       await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/v1/logout-user`,
+        `${import.meta.env.VITE_BACKEND_URL}/logout-user`,
         {},
         { withCredentials: true }
       );
