@@ -122,7 +122,12 @@ const LoginPage = () => {
         )}
       </div>
       <div className="font-[600] mt-[20px]">
-        <h1 className=" cursor-pointer text-[#2c76f7] hover:text-[blue]" onClick={()=>navigate("/signup")}>Create a new account</h1>
+        <h1
+          className=" cursor-pointer text-[#2c76f7] hover:text-[blue]"
+          onClick={() => navigate("/signup")}
+        >
+          Create a new account
+        </h1>
       </div>
     </div>
   );
