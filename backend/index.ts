@@ -15,7 +15,7 @@ app.use(cookieParser());
 // CORS [CROSS ORIGIN RESOURCE SHARING]
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173","https://zupay-blog-frontend.vercel.app"],
     credentials: true,
   })
 );
