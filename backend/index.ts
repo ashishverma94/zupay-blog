@@ -13,13 +13,16 @@ app.use(express.json({ limit: "50mb" }));
 // COOKIE PARSER
 app.use(cookieParser());
 // CORS [CROSS ORIGIN RESOURCE SHARING]
-app.use(cors({
-  origin: 'http://localhost:5173', 
-  credentials: true, 
-}));
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 // ROUTES
 import userRouter from "./routes/user.route";
-app.use("/api/v1", userRouter);
+import blogRouter from "./routes/blog.route";
+app.use("/", userRouter, blogRouter);
 
 // TESTING API
 app.get("/", (req: Request, res: Response) =>

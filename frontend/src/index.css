@@ -157,3 +157,8 @@
   box-shadow: -10px 10px 0 #6947BF;
   background: transparent;
 }
+
+.rotated-letter {
+  display: inline-block;
+  transform: scaleX(-1);
+}

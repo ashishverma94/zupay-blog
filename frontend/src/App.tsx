@@ -1,9 +1,10 @@
 import {
   Layout,
+  AddBlog,
+  EditBlog,
   HomePage,
   LoginPage,
   SignupPage,
-  AddAndEditBlog,
   BlogDetailsPage,
 } from "./pages";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -25,7 +26,11 @@ const App = () => {
             />
             <Route
               path="/add-blog"
-              element={<ProtectedRoute element={<AddAndEditBlog />} />}
+              element={<ProtectedRoute element={<AddBlog />} />}
+            />
+            <Route
+              path="/edit-blog/:id"
+              element={<ProtectedRoute element={<EditBlog />} />}
             />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
