@@ -20,10 +20,7 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
-            <Route
-              path="/blog/:id"
-              element={<ProtectedRoute element={<BlogDetailsPage />} />}
-            />
+            <Route path="/blog/:id" element={<BlogDetailsPage />} />
             <Route
               path="/add-blog"
               element={<ProtectedRoute element={<AddBlog />} />}

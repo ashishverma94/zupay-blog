@@ -68,9 +68,9 @@ const EditBlog = () => {
   };
 
   return (
-    <div className=" w-full flex justify-center items-center ">
+    <div className=" mt-[80px] bg-[#E5ECF3] w-full flex justify-center items-center ">
       <div className=" pc:w-[50%] w-[95%] tablet:w-[70%] flex flex-col justify-center items-center">
-        <h1 className="font-[700] text-[30px]">Edit Blog</h1>
+        <h1 className="font-[700] text-[30px] mt-4">Edit Blog</h1>
         <div className="w-full flex  flex-col gap-3">
           <div className="w-full">
             <label htmlFor="email" className={label_css}>

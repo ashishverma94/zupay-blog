@@ -70,9 +70,9 @@ const AddBlog = () => {
   };
 
   return (
-    <div className=" w-full flex justify-center items-center ">
+    <div className=" w-full mt-[80px] bg-[#E5ECF3] flex justify-center items-center ">
       <div className=" pc:w-[50%] w-[95%] tablet:w-[70%] flex flex-col justify-center items-center">
-        <h1 className="font-[700] text-[30px]">Add New Blog</h1>
+        <h1 className="font-[700] text-[30px] mt-4">Add New Blog</h1>
 
         <div className="w-full flex  flex-col gap-3">
           <div className="w-full">

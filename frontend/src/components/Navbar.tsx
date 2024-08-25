@@ -39,8 +39,8 @@ const Navbar = () => {
 
   return (
     <div className="w-full top-0 fixed z-20 border-t-[4px] border-[#6947BF] h-[10vh] flex justify-between bg-[white] pt-[16px] pb-[60px]">
-      <div>
-        <img className="h-[40px] px-6" src={Logo} alt="logo" />
+      <div onClick={() => navigate("/")}>
+        <img className="h-[40px] cursor-pointer px-6" src={Logo} alt="logo" />
       </div>
       {!isLoggedIn ? (
         <div className="px-[10px] gap-3 flex ">

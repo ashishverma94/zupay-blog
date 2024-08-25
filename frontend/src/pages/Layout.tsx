@@ -1,4 +1,4 @@
-import { Navbar, SideBar } from "@/components";
+import { Navbar } from "@/components";
 import { Outlet } from "react-router-dom";
 
 const Layout = () => {
@@ -6,11 +6,8 @@ const Layout = () => {
     <main className="h-screen flex flex-col">
       <Navbar />
       <div className="flex flex-1">
-        <SideBar />
-        <div className=" flex-1 ml-[70px]  bg-[white] ">
-          <div className="mt-[85px] p-[20px] bg-[#E5ECF3] min-h-[90vh] flex justify-center   rounded-tl-[20px]">
-            <Outlet />
-          </div>
+        <div className=" flex-1   bg-[white] ">
+          <Outlet />
         </div>
       </div>
     </main>

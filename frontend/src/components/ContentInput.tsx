@@ -15,11 +15,19 @@ const ContentInput: FC<props> = ({ contentData, setContentData }) => {
   const handleAddContent = () => {
     setContentData([...contentData, { cTitle: "", cDesc: "" }]);
     setTimeout(() => {
-      document
-        .getElementById("bottomLine")
-        ?.scrollIntoView({ behavior: "smooth" });
+      const bottomLineElement = document.getElementById("bottomLine");
+
+      if (bottomLineElement) {
+        const rect = bottomLineElement.getBoundingClientRect();
+
+        window.scrollTo({
+          top: window.scrollY + rect.bottom - window.innerHeight + 45,
+          behavior: "smooth",
+        });
+      }
     }, 0);
   };
+
   const handleRemoveContent = (index: number) => {
     const list = [...contentData];
     list.splice(index, 1);
