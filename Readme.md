@@ -5,6 +5,13 @@ This project is a full-stack application with a React frontend and an Express Js
 
 Deployed Link : https://zupay-blog-frontend.vercel.app
 
+You can create new account or use these credentials 
+
+```
+email : user@gmail.com
+password : 123456
+```
+
 ## Setup Instructions
 
 ### 1. Clone the Repository
@@ -66,5 +73,13 @@ The CI/CD pipeline has been configured to automate the deployment process for th
 
 
 ## Responsiveness Showcase
+
+![Screenshot (259)](https://github.com/user-attachments/assets/988cb61d-65a0-4cf9-8edc-8fee94511a11)
+
+![Screenshot (258)](https://github.com/user-attachments/assets/59d89efc-0d11-4311-ac7a-41c84006375a)
+
+![Screenshot (260)](https://github.com/user-attachments/assets/1668eafa-f910-4565-b3cc-013967902f64)
+
+
 
 
